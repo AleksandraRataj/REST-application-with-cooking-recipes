@@ -1,0 +1,22 @@
+{
+  "name": "przepisnik",
+  "version": "1.0.0",
+  "description": "Aplikacja z przepisami",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KISiM-AGH/projekt-zaliczeniowy-ar-js.git"
+  },
+  "author": "Jan Smerecki & Aleksandra Rataj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KISiM-AGH/projekt-zaliczeniowy-ar-js/issues"
+  },
+  "homepage": "https://github.com/KISiM-AGH/projekt-zaliczeniowy-ar-js#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
