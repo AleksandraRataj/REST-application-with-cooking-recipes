@@ -4,7 +4,8 @@
   "description": "Aplikacja z przepisami",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "cross-env PORT=7000 nodemon --inspect"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,12 @@
   },
   "homepage": "https://github.com/KISiM-AGH/projekt-zaliczeniowy-ar-js#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "cross-env": "^7.0.3",
+    "express": "^4.17.1",
+    "knex": "^0.21.15",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "objection": "^2.2.3"
   }
 }
