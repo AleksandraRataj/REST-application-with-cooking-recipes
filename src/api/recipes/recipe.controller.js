@@ -1,3 +1,4 @@
+//Routing - ścieżka która jest połączona z daną funkcja
 const {Router} = require("express");
 const Recipe = require("../../models/recipe.model");
 const asyncHandler = require("../asynchronous-handler");
@@ -5,7 +6,7 @@ const RecipeNotFoundException = require("../../exceptions/recipe-not-found.excep
 
 const router = new Router();
 
-// GET /api/recipes
+//GET /api/recipes
 router.get('/', asyncHandler(async (req, res) => {
     const recipes = await Recipe.query();
     res.send(recipes);
@@ -13,15 +14,15 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // GET /api/recipes/2
 router.get('/:id', asyncHandler(async (req, res) => {
-    const id = req.param.id;
-    const recipe = await  Recipe.query().findById(id);
+    const {id} = req.params;
+    const recipe = await Recipe.query().findById(id);
 
     if(!recipe) {
         throw new RecipeNotFoundException();
     }
 
     res.send(recipe);
-}));
+}))
 
 // POST /api/recipes
 router.post('/', asyncHandler(async (req,res) => {
@@ -33,8 +34,8 @@ router.post('/', asyncHandler(async (req,res) => {
 
 // PUT /api/recipes/2
 router.put('/:id', asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const updatedRecipe = await Recipe.query().patchAndFetchById(id, req.body)
+    const {id} = req.params;
+    const updatedRecipe = await Recipe.query().patchAndFetchById(id, req.body);
 
     if(!updatedRecipe) {
         throw new RecipeNotFoundException();
