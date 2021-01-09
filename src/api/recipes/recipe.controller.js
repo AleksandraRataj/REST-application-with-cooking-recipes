@@ -46,7 +46,7 @@ router.put('/:id', asyncHandler(async (req, res) => {
     res.send(updatedRecipe);
 }));
 
-// DELETE /api/books/2
+// DELETE /api/recipes/2
 router.delete('/:id', asyncHandler(async (req, res) => {
     const {id} = req.params;
     const deletedCount = await Recipe.query().deleteById(id);
