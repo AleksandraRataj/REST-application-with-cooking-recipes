@@ -8,10 +8,10 @@ const BaseModel = require("./base.model");
 Model.knex(knex);
 
 //model - obiektowa interpretacja tabeli w bazie danych
-class Recipe extends BaseModel {
+class Ingredient extends BaseModel {
 
     static get tableName(){
-        return 'recipes';
+        return 'ingredients';
     }
 
     //walidacja danych przed zapisaniem ich do bazy
@@ -20,12 +20,10 @@ class Recipe extends BaseModel {
 
             type: 'object',
             properties: {
-                title: {type: 'string'},
-                description: {type: 'string'},
-                cookTime: {type: 'integer'},
+                name: {type: 'string'}
             }
         }
     }
 }
 
-module.exports = Recipe;
+module.exports = Ingredient;

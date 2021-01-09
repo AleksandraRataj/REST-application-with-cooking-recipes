@@ -28,6 +28,8 @@ router.get('/:id', asyncHandler(async (req, res) => {
 router.post('/', asyncHandler(async (req,res) => {
     const recipe = await Recipe.query().insert({
         title: req.body.title,
+        description: req.body.description,
+        cookTime: req.body.cookTime,
     });
     res.status(201).send(recipe);
 }));
