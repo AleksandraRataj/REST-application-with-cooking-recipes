@@ -1,14 +1,21 @@
 //Routing - ścieżka która jest połączona z daną funkcja
 const {Router} = require("express");
 const Recipe = require("../../models/recipe.model");
+const Ingredient = require("../../models/ingredient.model")
 const asyncHandler = require("../asynchronous-handler");
 const RecipeNotFoundException = require("../../exceptions/recipe-not-found.exception");
+const IngredientNotFoundException = require("../../exceptions/ingredient-not-found.exception");
 
 const router = new Router();
 
 //GET /api/recipes
 router.get('/', asyncHandler(async (req, res) => {
-    const recipes = await Recipe.query();
+    const recipes = await Recipe
+        .query()
+        .select('title', 'description',)
+        .withGraphJoined('ingredients')
+        .modifyGraph('ingredients', builder => builder.select('name'))
+
     res.send(recipes);
 }));
 
@@ -26,11 +33,20 @@ router.get('/:id', asyncHandler(async (req, res) => {
 
 // POST /api/recipes
 router.post('/', asyncHandler(async (req,res) => {
-    const recipe = await Recipe.query().insert({
+    const {ingredient_id} = req.body;
+    const ingredient = await Ingredient.query().findById(ingredient_id);
+    if(!ingredient) throw new IngredientNotFoundException;
+    console.log(ingredient.toJSON());
+
+    const recipe = await Recipe.query().upsertGraphAndFetch({
         title: req.body.title,
         description: req.body.description,
         cookTime: req.body.cookTime,
+        ingredients: [{
+            '#dbRef': ingredient_id
+        }]
     });
+
     res.status(201).send(recipe);
 }));
 

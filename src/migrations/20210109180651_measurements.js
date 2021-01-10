@@ -7,6 +7,7 @@ exports.up = function(knex) {
         table.string("unit").notNullable();
         table.timestamp("created_at").defaultTo(knex.fn.now());
         table.timestamp("updated_at").defaultTo(knex.fn.now());
+        table.integer('ingredient_id').unique().references('ingredients.id').onDelete('CASCADE');
     })
 };
 

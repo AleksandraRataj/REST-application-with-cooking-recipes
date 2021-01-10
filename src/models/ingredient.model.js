@@ -14,7 +14,7 @@ class Ingredient extends BaseModel {
         return 'ingredients';
     }
 
-    //walidacja danych przed zapisaniem ich do bazy
+    // walidacja danych przed zapisaniem ich do bazy
     static get jsonSchema(){
         return {
 
@@ -24,6 +24,20 @@ class Ingredient extends BaseModel {
             }
         }
     }
+
+    static get relationMappings() {
+        return {
+            measurement: {
+                relation: Model.HasOneRelation,
+                modelClass: require('./measurement.model'),
+                join: {
+                    from: 'ingredients.id',
+                    to: 'measurements.ingredient_id'
+                }
+            },
+        }
+    }
+
 }
 
 module.exports = Ingredient;

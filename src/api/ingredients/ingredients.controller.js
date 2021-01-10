@@ -7,7 +7,12 @@ const router = new Router();
 
 //GET /api/ingredients
 router.get('/', asyncHandler(async (req, res) => {
-    const ingredients = await Ingredient.query();
+    const ingredients = await Ingredient
+        .query()
+        .select('name')
+        .withGraphJoined('measurement')
+        .modifyGraph('measurement', builder => builder.select('measurement','unit'))
+
     res.send(ingredients);
 }));
 
@@ -25,9 +30,14 @@ router.get('/:id', asyncHandler(async (req, res) => {
 
 // POST /api/ingredients
 router.post('/', asyncHandler(async (req,res) => {
-    const ingredient = await Ingredient.query().insert({
-        name: req.body.name
+    const ingredient = await Ingredient.query().insertGraphAndFetch({
+        name : req.body.name,
+        measurement : {
+            measurement: req.body.measurement,
+            unit: req.body.unit,
+        },
     });
+
     res.status(201).send(ingredient);
 }));
 

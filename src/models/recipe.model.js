@@ -26,6 +26,24 @@ class Recipe extends BaseModel {
             }
         }
     }
+
+    // chcemy połaczyć recipe z istniejącymi już ingredients
+    static get relationMappings() {
+        return {
+            ingredients: {
+                relation: Model.ManyToManyRelation,
+                modelClass: require('./ingredient.model'),
+                join: {
+                    from: 'recipes.id',
+                    to: 'ingredients.id',
+                    through: {
+                        from: 'recipes_ingredients.recipe_id',
+                        to: 'recipes_ingredients.ingredient_id'
+                    },
+                },
+            },
+        };
+    }
 }
 
 module.exports = Recipe;

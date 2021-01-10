@@ -25,6 +25,20 @@ class Measurement extends BaseModel {
             }
         }
     }
+
+    static get relationMappings() {
+        return {
+            ingredient: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: require('./ingredient.model'),
+                join: {
+                    from: 'measurements.ingredient_id',
+                    to: 'ingredients.id',
+                }
+            }
+        }
+    }
+
 }
 
 module.exports = Measurement;

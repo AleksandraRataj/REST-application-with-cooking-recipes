@@ -9,5 +9,10 @@ module.exports = {
     migrations: {
         directory: path.join(__dirname, 'src', 'migrations'),
     },
+    pool: {
+        afterCreate: (conn, cb) => {
+            conn.run('PRAGMA foreign_keys = ON', cb)
+        },
+    },
     //__dirname - aktualny katalog w którym sie znajduje
 };
