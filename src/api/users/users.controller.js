@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 
 const router = new Router();
 
-const SECRET_KEY = "9cc2243ab5d142fbc642ba43c46ec53756b11b9f12b854d84e372327a7a8f03514ebd9e5da6f296df605f33cedde7606a95a783fa5201bd56ab079fe0122c2fa";
+const SECRET_KEY = '9eabb363e4e0dea332bb83a5d11837e287bc1aab9d3676ced19c5888db4c7fc6bc931e548189b6b80476abe03c5b353fdac2a2c940b3421ec9e7ffdbb664b7f8';
 
 authenticateToken = (req, res, next) => {
     let token = req.get("authorization");
