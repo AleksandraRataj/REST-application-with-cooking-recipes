@@ -1,5 +1,4 @@
-const path = require("path"); //aby połączyć fragmenty ściażki aplikacji
-// Update with your config settings.
+const path = require("path");
 
 module.exports = {
     client: 'sqlite3',
@@ -11,8 +10,7 @@ module.exports = {
     },
     pool: {
         afterCreate: (conn, cb) => {
-            conn.run('PRAGMA foreign_keys = ON', cb)
+            conn.run('PRAGMA foreign_keys = ON', cb);
         },
     },
-    //__dirname - aktualny katalog w którym sie znajduje
 };
