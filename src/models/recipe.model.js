@@ -10,16 +10,16 @@ Model.knex(knex);
 //model - obiektowa interpretacja tabeli w bazie danych
 class Recipe extends BaseModel {
 
-    static get tableName(){
+    static get tableName() {
         return 'recipes';
     }
 
     //walidacja danych przed zapisaniem ich do bazy
-    static get jsonSchema(){
+    static get jsonSchema() {
         return {
-
             type: 'object',
             properties: {
+                id: {type: 'integer'},
                 title: {type: 'string'},
                 description: {type: 'string'},
                 cookTime: {type: 'integer'},
@@ -32,7 +32,7 @@ class Recipe extends BaseModel {
         return {
             ingredients: {
                 relation: Model.ManyToManyRelation,
-                modelClass: require('./ingredient.model'),
+                modelClass: require("./ingredient.model"),
                 join: {
                     from: 'recipes.id',
                     to: 'ingredients.id',
@@ -42,6 +42,14 @@ class Recipe extends BaseModel {
                     },
                 },
             },
+            users: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: require('./user.model'),
+                join: {
+                    from: 'recipes.user_id',
+                    to: 'users.id'
+                }
+            }
         };
     }
 }

@@ -37,7 +37,6 @@ class Ingredient extends BaseModel {
             },
         }
     }
-
 }
 
 module.exports = Ingredient;

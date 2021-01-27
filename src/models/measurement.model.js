@@ -20,6 +20,7 @@ class Measurement extends BaseModel {
 
             type: 'object',
             properties: {
+                id: {type: 'integer'},
                 measurement: {type: 'double'},
                 unit: {type: 'string'},
             }
