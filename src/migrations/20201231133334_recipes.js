@@ -7,6 +7,7 @@ exports.up = function(knex) {
       table.string("title").notNullable();
       table.string("description").notNullable();
       table.integer("cookTime").notNullable();
+      table.integer('user_id').references('id').inTable('users').onDelete('CASCADE');
       table.timestamp("created_at").defaultTo(knex.fn.now());
       table.timestamp("updated_at").defaultTo(knex.fn.now());
   })
