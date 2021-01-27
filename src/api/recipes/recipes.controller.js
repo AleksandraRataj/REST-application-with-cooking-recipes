@@ -24,7 +24,7 @@ router.get('/:id', asyncHandler(async (req, res) => {
     const {id} = req.params;
     const recipe = await Recipe.query().findById(id);
 
-    if(!recipe) {
+    if (!recipe) {
         throw new RecipeNotFoundException();
     }
 
@@ -32,10 +32,12 @@ router.get('/:id', asyncHandler(async (req, res) => {
 }))
 
 // POST /api/recipes
-router.post('/', asyncHandler(async (req,res) => {
-    const {ingredient_id} = req.body;
+router.post('/', asyncHandler(async (req, res) => {
+
+    const {ingredients} = req.body;
+
     const ingredient = await Ingredient.query().findById(ingredient_id);
-    if(!ingredient) throw new IngredientNotFoundException;
+    if (!ingredient) throw new IngredientNotFoundException;
     console.log(ingredient.toJSON());
 
     const recipe = await Recipe.query().upsertGraphAndFetch({
@@ -43,11 +45,12 @@ router.post('/', asyncHandler(async (req,res) => {
         description: req.body.description,
         cookTime: req.body.cookTime,
         ingredients: [{
-            '#dbRef': ingredient_id
+            '#dbRef': ingredient
         }]
     });
 
     res.status(201).send(recipe);
+
 }));
 
 // PUT /api/recipes/2
@@ -55,7 +58,7 @@ router.put('/:id', asyncHandler(async (req, res) => {
     const {id} = req.params;
     const updatedRecipe = await Recipe.query().patchAndFetchById(id, req.body);
 
-    if(!updatedRecipe) {
+    if (!updatedRecipe) {
         throw new RecipeNotFoundException();
     }
 
@@ -67,7 +70,7 @@ router.delete('/:id', asyncHandler(async (req, res) => {
     const {id} = req.params;
     const deletedCount = await Recipe.query().deleteById(id);
 
-    if(deletedCount === 0) {
+    if (deletedCount === 0) {
         throw new RecipeNotFoundException();
     }
 
