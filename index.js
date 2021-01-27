@@ -1,5 +1,6 @@
 const express = require('express');
 const api = require('./src/api');
+
 const errorHandler = require("./src/middlewares/errorHandler");
 const databaseErrorHandler = require("./src/middlewares/databaseErrorHandler");
 
