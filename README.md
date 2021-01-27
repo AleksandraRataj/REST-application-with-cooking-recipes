@@ -15,7 +15,7 @@ Projekt-zaliczeniowy-ar-js created by GitHub Classroom.
 - body-parser -> https://www.npmjs.com/package/body-parser
 - jsonwebtoken -> https://www.npmjs.com/package/jsonwebtoken
 
-##Database schema
+## Database schema
 
 We have created a database based on the schema:
 
@@ -23,7 +23,7 @@ We have created a database based on the schema:
 
 We used migrations to control changes to the database structure.
 
-##Project description - what we did
+## Project description - what we did:
 
 In javascript, we have created models corresponding to individual tables in the database. In the models, we defined the relationships between the models.
 
